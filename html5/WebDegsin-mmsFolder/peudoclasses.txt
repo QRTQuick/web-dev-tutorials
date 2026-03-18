@@ -1,0 +1,156 @@
+CSS PSEUDO-CLASSES AND PSEUDO-ELEMENTS
+
+1. PSEUDO-CLASSES
+A pseudo-class is used to define a special state of an element.
+
+Syntax:
+selector:pseudo-class {
+    property: value;
+}
+
+Examples:
+
+button:hover {
+    background-color: red;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+input:focus {
+    border: 2px solid blue;
+}
+
+li:nth-child(2) {
+    color: green;
+}
+
+li:first-child {
+    font-weight: bold;
+}
+
+li:last-child {
+    color: red;
+}
+
+p:not(.important) {
+    color: gray;
+}
+
+Key Point:
+Pseudo-classes do not create new elements.
+They style elements based on state or position.
+
+
+2. PSEUDO-ELEMENTS
+A pseudo-element is used to style a specific part of an element.
+
+Syntax:
+selector::pseudo-element {
+    property: value;
+}
+
+Examples:
+
+h1::before {
+    content: "Text ";
+}
+
+h1::after {
+    content: " Text";
+}
+
+p::first-letter {
+    font-size: 30px;
+    color: red;
+}
+
+p::first-line {
+    font-weight: bold;
+}
+
+::selection {
+    background: black;
+    color: white;
+}
+
+Key Point:
+Pseudo-elements can create virtual elements like before and after.
+
+
+3. DIFFERENCE
+
+Pseudo-class:
+Uses single colon (:)
+Targets state (hover, focus, active)
+Example: :hover
+
+Pseudo-element:
+Uses double colon (::)
+Targets part of element
+Example: ::before
+
+
+4. COMBINED EXAMPLE
+
+button:hover::after {
+    content: " Click me!";
+    color: yellow;
+}
+
+
+CSS PSEUDO-CLASSES AND PSEUDO-ELEMENTS
+
+Pseudo-classes and pseudo-elements are used in CSS to apply special styles to elements.
+
+1. PSEUDO-CLASSES
+
+A pseudo-class describes the state or condition of an element.
+
+It is used when you want to style an element based on user interaction or position.
+
+Examples of states:
+- When a user moves the mouse over an element (hover)
+- When an element is clicked (active)
+- When an input field is selected (focus)
+- When selecting elements by position (first child, last child, nth child)
+
+Important points:
+- Uses a single colon (:)
+- Does not create new elements
+- Only changes how an existing element looks in a certain condition
+
+
+2. PSEUDO-ELEMENTS
+
+A pseudo-element is used to style a specific part of an element.
+
+It allows you to style parts of content or insert content without adding extra HTML.
+
+Examples of parts:
+- The first letter of a paragraph
+- The first line of text
+- Content before or after an element
+
+Important points:
+- Uses double colons (::)
+- Can create "virtual" elements (like adding content before or after)
+- Targets parts of elements, not the whole element
+
+
+3. DIFFERENCE
+
+Pseudo-class:
+- Focuses on the state or condition of an element
+- Example idea: when the user interacts with it
+
+Pseudo-element:
+- Focuses on a specific part of an element
+- Example idea: a portion or added content
+
+
+4. SIMPLE WAY TO REMEMBER
+
+Pseudo-class = condition or state
+Pseudo-element = part of an element

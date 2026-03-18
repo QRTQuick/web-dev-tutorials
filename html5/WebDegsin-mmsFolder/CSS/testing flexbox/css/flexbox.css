@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.parent{
+    display:flex;
+    border:3px solid black;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+div.parent .child{
+    height: 200px;
+    width: 200px;
+    background-color: aqua;
+    overflow: auto;
+}
+
+
+
+div.parent .child:hover{
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: red;
+    height: 300px;
+    width: 400px;
+    background-color: aqua;
+    
+}
+
+div.parent .child .text{
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    font-size: 20px;
+    color: black;
+   
+}

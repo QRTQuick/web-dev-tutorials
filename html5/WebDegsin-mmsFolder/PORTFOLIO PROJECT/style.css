@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Nav bar */
+.navigationBar {
+    background-color: #333;
+    padding: 12px 20px;
+}
+
+.navList {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 10px;
+}
+
+.navList li a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+/* Individual nav item colors */
+.navList .home a {
+    background-color: #e74c3c;
+}
+
+.navList .about a {
+    background-color: #3498db;
+}
+
+.navList .contact a {
+    background-color: #2ecc71;
+}
+
+.navList .github a {
+    background-color: #9b59b6;
+}
+
+/* Individual hover colors */
+.navList .home a:hover {
+    background-color: #c0392b;
+}
+
+.navList .about a:hover {
+    background-color: #2980b9;
+}
+
+.navList .contact a:hover {
+    background-color: #27ae60;
+}
+
+.navList .github a:hover {
+    background-color: #8e44ad;
+}
+.section1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    border: 1px solid #2c2c2c;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 12px;
+    background-color: #1a1a2e;
+    color: white;
+}
+
+/* Profile image */
+.profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #667eea;  /* purple-blue accent matches dark theme */
+}
+
+/* Intro text */
+.section1Intro h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.section1Intro p {
+    font-size: 15px;
+    color: #a0a0b0;  /* soft grey-blue, easier on the eyes than pure white */
+    line-height: 1.7;
+    max-width: 500px;
+}
+.aboutMe {
+    background-color: #16213e;
+    border: 1px solid #2c2c2c;
+    border-radius: 12px;
+    padding: 40px;
+    margin: 20px;
+    position: relative;
+}
+
+/* Accent line on the left */
+.aboutMe::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px 0 0 12px;
+}
+
+.aboutMe h2 {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Underline accent under h2 */
+.aboutMe h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+.aboutMe p {
+    font-size: 15px;
+    color: #a0a0b0;
+    line-height: 1.8;
+    max-width: 700px;
+}

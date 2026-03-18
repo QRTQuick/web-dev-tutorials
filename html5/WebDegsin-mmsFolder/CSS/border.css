@@ -1,0 +1,16 @@
+.text{
+    border: 1px solid black;
+    /* padding: 20px 30px 10px 55px; */
+    /* padding: 30px 20px; */
+    /* padding: 30px 20px 7px; */
+    padding-top: 20px;
+    padding-bottom: 23px;
+    padding-left: 0;
+
+}
+.paragraph1{
+    margin-bottom: 90px;
+}
+.paragraph2{
+    margin-left: 50px;
+}
