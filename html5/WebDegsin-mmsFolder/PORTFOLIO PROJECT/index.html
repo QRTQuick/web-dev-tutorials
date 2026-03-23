@@ -1,55 +1,210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chisom life eke web portfolio</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class= "navigationBar"> 
-        <ul class="navList">
-            <li class="home"><a href="#" ><i class="fa-solid fa-house"></i>Home</a></li>
-            <li class="about"><a href="#aboutMe" ><i class="fa-solid fa-circle-info"></i>About me</a></li>
-            <li class="contact"><a href="#" ><i class="fa-solid fa-address-book"></i>Contact me</a></li>
-            <li class="github"><a href="https://github.com/QRTQuick/" target="_blank"><i class="fa-brands fa-github"></i>GITHUB</a></li>
-        </ul>
-    </div>
-    <div class = "section1">
-        <div class="profile">
-            <img src="images/profile.jpg" alt="profile picture">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chisom Life Eke - Portfolio</title>
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@700&family=Rajdhani:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <!-- navbar -->
+        <div class="navbar">
+            <p class="logo">Chisom Life Eke</p>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
-        <div class="section1Intro">
-            <h1>Hi, I'm Chisom Eke</h1>
-            <p>Welcome to my portfolio website! Here you can find information about me, my skills, and my projects. Feel free to explore and contact me if you have any questions or would like to work together.</p>
+
+        <!-- top section -->
+        <div class="top-section">
+            <i class="fa-solid fa-terminal top-icon"></i>
+            <h1>Hi, I am Chisom Life Eke</h1>
+            <h3>Web Developer &amp; Software Engineering Student at NIIT</h3>
+            <p>
+                I love coding and building things with HTML, CSS, Python, Rust,
+                C, Assembly and C++.
+            </p>
+            <br />
+            <a class="btn-black" href="#projects">See My Work</a>
+            <a class="btn-red" href="#contact">Contact Me</a>
         </div>
 
-    </div>
-   <div class="aboutMe" id="aboutMe">
-    <h2>About Me</h2>
-    <p>I am a software developer with a passion for creating innovative solutions. I have experience in web development, mobile app development, and software engineering. I enjoy working on projects that challenge me and allow me to learn new skills.</p>
+        <!-- about section -->
+        <div id="about" class="about-section">
+            <h2>About Me</h2>
+            <hr class="black-line" />
+            <p>
+                My name is <b>Chisom Life Eke</b> and I am a student at
+                <b>NIIT</b>. I am studying Software Engineering and I really
+                enjoy coding. I started learning HTML and CSS first, then I
+                moved to Python, and now I also write Rust, C, C++ and even
+                Assembly language.
+            </p>
+            <br />
+            <p>
+                I want to become a great software engineer and build cool
+                things. I am always learning new stuff every day. When I am not
+                coding I like to watch YouTube videos about tech and
+                programming.
+            </p>
+            <br />
+            <div class="about-boxes">
+                <div class="box-black">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <p>NIIT Student</p>
+                </div>
+                <div class="box-black">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <p>Web Developer</p>
+                </div>
+                <div class="box-red">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Port Harcourt, Nigeria</p>
+                </div>
+                <div class="box-red">
+                    <i class="fa-solid fa-bolt"></i>
+                    <p>Fast Learner</p>
+                </div>
+            </div>
+        </div>
 
-    <p>I graduated with a degree in Computer Science and have since worked on a variety of projects ranging from small business websites to large-scale enterprise applications. I am always looking for new opportunities to grow and expand my skill set.</p>
+        <!-- skills section -->
+        <div id="skills" class="skills-section">
+            <h2>My Skills</h2>
+            <hr class="red-line" />
+            <p>These are the things I know how to do:</p>
+            <br />
+            <div class="skills-list">
+                <div class="skill-item">
+                    <i class="fa-brands fa-html5"></i>
+                    <p>HTML</p>
+                </div>
 
-    <p>When I'm not coding, I enjoy reading tech blogs, contributing to open source projects, and mentoring aspiring developers. I believe in writing clean, efficient, and maintainable code that makes a real difference.</p>
+                <div class="skill-item">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <p>CSS</p>
+                </div>
 
-    <h3>My Skills</h3>
-    <ul>
-        <li>HTML, CSS, JavaScript</li>
-        <li>React, Node.js</li>
-        <li>Python, Java</li>
-        <li>Mobile App Development</li>
-        <li>Database Management (MySQL, MongoDB)</li>
-    </ul>
+                <div class="skill-item">
+                    <i class="fa-brands fa-python"></i>
+                    <p>Python</p>
+                </div>
 
-    <h3>My Goals</h3>
-        <p>My goal is to continue growing as a developer and contribute to projects that make a positive impact. I am currently open to new opportunities and collaborations — feel free to reach out!</p>
-    </div>
+                <div class="skill-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <p>Rust</p>
+                </div>
 
-    <div>
-        <h1 > </h1>
-    </div>
-</body>
+                <div class="skill-item">
+                    <i class="fa-solid fa-c"></i>
+                    <p>C Language</p>
+                </div>
+
+                <div class="skill-item">
+                    <i class="fa-solid fa-microchip"></i>
+                    <p>Assembly</p>
+                </div>
+
+                <div class="skill-item">
+                    <i class="fa-solid fa-code"></i>
+                    <p>C++</p>
+                </div>
+
+                <div class="skill-item">
+                    <i class="fa-brands fa-git-alt"></i>
+                    <p>Git</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- projects section -->
+        <div id="projects" class="projects-section">
+            <h2>My Projects</h2>
+            <hr class="black-line" />
+            <p>Here are some things I have built:</p>
+            <br />
+            <div class="projects-list">
+                <div class="project-card">
+                    <i class="fa-solid fa-globe"></i>
+                    <h3>My First Website</h3>
+                    <p>
+                        A simple website I made using HTML and CSS. It was my
+                        first ever project when I started learning web
+                        development at NIIT.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>Python Calculator</h3>
+                    <p>
+                        A calculator I built using Python. It can do addition,
+                        subtraction, multiplication and division. I am proud of
+                        this one.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-list"></i>
+                    <h3>To Do List App</h3>
+                    <p>
+                        A to do list app made with HTML, CSS and a little bit of
+                        Python for the backend. You can add and remove tasks.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-memory"></i>
+                    <h3>Memory Game in C</h3>
+                    <p>
+                        A simple memory matching game I wrote in C language as
+                        part of my NIIT coursework. It runs in the terminal.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- contact section -->
+        <div id="contact" class="contact-section">
+            <h2>Contact Me</h2>
+            <hr class="red-line" />
+            <p>You can reach me through any of these:</p>
+            <br />
+            <div class="contact-links">
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i> Chisom Life Eke
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-github"></i> QRTQuick
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-tiktok"></i> bot_hero
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-whatsapp"></i> 07062423270
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <p>
+                Made by Chisom Life Eke &nbsp;|&nbsp; NIIT Student &nbsp;|&nbsp;
+                2026
+            </p>
+        </div>
+    </body>
 </html>
