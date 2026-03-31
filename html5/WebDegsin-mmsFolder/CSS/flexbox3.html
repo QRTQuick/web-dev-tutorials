@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <title>flrẋbox 3</title>
+        <style>
+            .parent-container {
+                height: 500px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            section.child {
+                height: 100px;
+                width: 200px;
+                text-align: center;
+                /*line-height: 100px;*/
+                /*padding-top: 50px;   movment of the text to center of the box*/
+                align-content: center;
+                color: white;
+                background-color: teal;
+                font-size: 40px;
+            }
+            .six {
+                align-self: end;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent-container">
+            <section class="child">one</section>
+            <section class="child">two</section>
+            <section class="child">three</section>
+            <section class="child">four</section>
+            <section class="child">five</section>
+            <section class="child six">six</section>
+        </div>
+    </body>
+</html>

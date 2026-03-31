@@ -1,28 +1,31 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-div.parent{
-    display:flex;
-    border:3px solid black;
-    gap: 5px;
-    justify-content: space-between;
+div.parent {
+    display: flex;
+    border: 2px solid black;
+    gap: 20px;
+    justify-content: center;
+    height: 500px;
+    align-items: center;
 }
 
-div.parent .child{
+div.parent .child {
     height: 200px;
     width: 200px;
     background-color: aqua;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-div.parent .child:hover{
-    font-family: 'Courier New', Courier, monospace;
+div.parent .child:hover {
+    font-family: "Courier New", Courier, monospace;
     font-size: 70px;
     color: red;
     height: 300px;
     width: 400px;
     background-color: aqua;
-    
-}    
+}

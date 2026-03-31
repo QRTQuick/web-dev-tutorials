@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform html</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
+
+        }
+
+        .square1 {
+
+            background: gold;
+
+            transition: all 2000ms ease;
+
+        }
+
+        .square1:hover {
+            transform: rotate(360deg);
+        }
+
+        .square2 {
+
+            background: red;
+            transition: all 2000ms ease;
+        }
+
+        .square2:hover {
+            transform: scaleY(1.5);
+        }
+
+        .square3 {
+
+            background: blue;
+
+        }
+
+        .square4 {
+            background: thistle;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box square1"></div>
+    <div class="box square2"></div>
+    <div class="box square3"></div>
+    <div class="box square4"></div>
+</body>
+
+</html>
