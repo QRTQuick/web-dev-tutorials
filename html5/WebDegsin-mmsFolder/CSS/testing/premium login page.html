@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nebula Access | Premium Login Experience</title>
+    <!-- Google Fonts + Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* subtle premium feel, text select still possible on form */
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 1.5rem;
+        }
+
+        /* ----- ANIMATED LARGE BLUR BALLS (PREMIUM BACKGROUND) ----- */
+        .ball {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(70px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.55;
+            will-change: transform;
+            transition: transform 0.2s ease-out;
+        }
+
+        .ball.one {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle at 30% 35%, rgba(255, 90, 150, 0.8), rgba(150, 40, 200, 0.3));
+            top: -15%;
+            left: -12%;
+            animation: floatOrb1 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ball.two {
+            width: 620px;
+            height: 620px;
+            background: radial-gradient(circle at 70% 65%, rgba(0, 200, 255, 0.7), rgba(0, 80, 255, 0.25));
+            bottom: -20%;
+            right: -18%;
+            animation: floatOrb2 26s infinite alternate cubic-bezier(0.45, 0.05, 0.2, 0.99);
+        }
+
+        .ball.three {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle at 45% 55%, rgba(255, 180, 70, 0.8), rgba(255, 70, 120, 0.4));
+            top: 40%;
+            left: 65%;
+            animation: floatOrb3 19s infinite alternate ease-in-out;
+            filter: blur(85px);
+        }
+
+        /* additional subtle moving orb for depth */
+        @keyframes floatOrb1 {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            100% {
+                transform: translate(35vw, 20vh) rotate(15deg) scale(1.2);
+            }
+        }
+
+        @keyframes floatOrb2 {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            100% {
+                transform: translate(-28vw, -15vh) rotate(-12deg) scale(1.25);
+            }
+        }
+
+        @keyframes floatOrb3 {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.9);
+            }
+            100% {
+                transform: translate(-20vw, -25vh) rotate(20deg) scale(1.15);
+            }
+        }
+
+        /* ----- GLASS CARD (PREMIUM LOGIN MODULE) ----- */
+        .login-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: cardGlideUp 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+
+        @keyframes cardGlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(35px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .glass-card {
+            background: rgba(12, 20, 35, 0.48);
+            backdrop-filter: blur(18px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 255, 255, 0.05) inset;
+            padding: 2.5rem 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Branding & header */
+        .brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .brand-icon {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #FFB88C, #FF6A88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(to right, #ffffff, #e0eaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .greeting {
+            color: rgba(220, 230, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        /* Input groups with icons */
+        .input-group {
+            position: relative;
+            margin-bottom: 1.6rem;
+        }
+        .input-group i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: rgba(210, 225, 255, 0.7);
+            transition: color 0.2s ease;
+            pointer-events: none;
+        }
+        .input-group input {
+            width: 100%;
+            background: rgba(20, 30, 48, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2rem;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s ease;
+            outline: none;
+            backdrop-filter: blur(5px);
+        }
+        .input-group input:focus {
+            border-color: #FF8A7A;
+            background: rgba(25, 40, 60, 0.8);
+            box-shadow: 0 0 0 3px rgba(255, 110, 120, 0.25);
+        }
+        .input-group input:focus + i {
+            color: #FF9A85;
+        }
+        .input-group input::placeholder {
+            color: rgba(200, 210, 240, 0.55);
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        /* Extras row (remember & forgot) */
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.2rem 0 1.8rem;
+            font-size: 0.85rem;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(235, 240, 255, 0.85);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .checkbox-label input {
+            accent-color: #FF7A6E;
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+        .forgot-link {
+            color: #FFB0A0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            border-bottom: 1px dotted transparent;
+        }
+        .forgot-link:hover {
+            color: #FFD0C0;
+            border-bottom-color: #FF9A85;
+        }
+
+        /* Premium Button */
+        .login-btn {
+            background: linear-gradient(105deg, #FF6A6E, #FF8A7A, #FFB06E);
+            background-size: 200% auto;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .login-btn:hover::before {
+            left: 100%;
+        }
+        .login-btn:hover {
+            transform: scale(1.02);
+            background-position: right center;
+            box-shadow: 0 15px 30px -8px rgba(255, 90, 90, 0.5);
+        }
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* signup redirect */
+        .signup-prompt {
+            text-align: center;
+            margin-top: 2rem;
+            color: rgba(210, 220, 250, 0.7);
+            font-size: 0.9rem;
+        }
+        .signup-prompt a {
+            color: #FFB88C;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.3rem;
+            transition: 0.2s;
+            border-bottom: 1px solid rgba(255, 180, 130, 0.3);
+        }
+        .signup-prompt a:hover {
+            color: #FFD6AA;
+            border-bottom-color: #FFA070;
+        }
+
+        /* responsive touch */
+        @media (max-width: 550px) {
+            .glass-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2rem;
+            }
+            .ball.one {
+                width: 380px;
+                height: 380px;
+                filter: blur(60px);
+            }
+            .ball.two {
+                width: 450px;
+                height: 450px;
+            }
+            .ball.three {
+                width: 280px;
+                height: 280px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* small extra glow animation for inputs on hover */
+        .input-group:hover input {
+            border-color: rgba(255, 150, 130, 0.5);
+        }
+
+        /* custom checkbox style */
+        .checkbox-label input {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 4px;
+        }
+
+        /* disable weird background bleeding on card */
+        body, .login-container {
+            isolation: isolate;
+        }
+
+        /* additional fine details */
+        hr {
+            margin: 1rem 0;
+            border-color: rgba(255,255,240,0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Premium Background Orbs -->
+    <div class="ball one"></div>
+    <div class="ball two"></div>
+    <div class="ball three"></div>
+
+    <!-- Main Login Card Module -->
+    <div class="login-container">
+        <div class="glass-card">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h1>NEBULA ACCESS</h1>
+                <p class="greeting">Welcome back · premium experience</p>
+            </div>
+
+            <form action="#" method="post" id="premiumLoginForm">
+                <!-- Email / Username Field -->
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required>
+                </div>
+
+                <!-- Password Field -->
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                </div>
+
+                <!-- Options Row: Remember Me + Forgot Password -->
+                <div class="options-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember"> <span>Remember for 30 days</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <!-- Sign In Button -->
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i> Sign In
+                </button>
+
+                <div class="signup-prompt">
+                    No account yet?
+                    <a href="#">Upgrade to premium →</a>
+                </div>
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.7rem; opacity: 0.5;">
+                    <i class="fas fa-shield-alt"></i> Encrypted access · next-gen security
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- small script for interactive demo: console feedback & basic alert (non-intrusive) -->
+    <script>
+        (function() {
+            // Create subtle interactive feedback to simulate premium login flow
+            const form = document.getElementById('premiumLoginForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = document.getElementById('email');
+                    const passwordInput = document.getElementById('password');
+                    const email = emailInput.value.trim();
+                    const pwd = passwordInput.value.trim();
+
+                    if (!email || !pwd) {
+                        // gentle error simulation: animated shake effect + elegant alert-like toast? we just do micro interaction
+                        const glassCard = document.querySelector('.glass-card');
+                        glassCard.style.transform = 'translateX(4px)';
+                        setTimeout(() => { glassCard.style.transform = ''; }, 100);
+                        glassCard.style.transform = 'translateX(-4px)';
+                        setTimeout(() => { glassCard.style.transform = ''; }, 100);
+                        // subtle floating message simulation without ugly alert
+                        const tempMsg = document.createElement('div');
+                        tempMsg.textContent = "⚠️ Please fill in both credentials";
+                        tempMsg.style.position = 'fixed';
+                        tempMsg.style.bottom = '20px';
+                        tempMsg.style.left = '50%';
+                        tempMsg.style.transform = 'translateX(-50%)';
+                        tempMsg.style.background = 'rgba(0,0,0,0.75)';
+                        tempMsg.style.backdropFilter = 'blur(12px)';
+                        tempMsg.style.padding = '12px 24px';
+                        tempMsg.style.borderRadius = '60px';
+                        tempMsg.style.color = '#FFC8B0';
+                        tempMsg.style.fontSize = '0.85rem';
+                        tempMsg.style.fontWeight = '500';
+                        tempMsg.style.zIndex = '999';
+                        tempMsg.style.border = '1px solid rgba(255,120,100,0.4)';
+                        tempMsg.style.fontFamily = "'Inter', sans-serif";
+                        document.body.appendChild(tempMsg);
+                        setTimeout(() => { tempMsg.style.opacity = '0'; setTimeout(() => tempMsg.remove(), 500); }, 2000);
+                        return;
+                    }
+                    
+                    // Simulate premium authentication (mock demo)
+                    const btn = document.querySelector('.login-btn');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Authenticating...';
+                    btn.disabled = true;
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        // success effect
+                        const successToast = document.createElement('div');
+                        successToast.innerHTML = '<i class="fas fa-check-circle"></i> Welcome back, premium member!';
+                        successToast.style.position = 'fixed';
+                        successToast.style.bottom = '30px';
+                        successToast.style.left = '50%';
+                        successToast.style.transform = 'translateX(-50%)';
+                        successToast.style.background = 'linear-gradient(135deg, #1a2a3f, #0f1a2a)';
+                        successToast.style.backdropFilter = 'blur(20px)';
+                        successToast.style.padding = '14px 32px';
+                        successToast.style.borderRadius = '50px';
+                        successToast.style.color = '#FFFFFF';
+                        successToast.style.fontWeight = '600';
+                        successToast.style.border = '1px solid rgba(255,180,130,0.6)';
+                        successToast.style.boxShadow = '0 15px 35px rgba(0,0,0,0.3)';
+                        successToast.style.zIndex = '999';
+                        successToast.style.fontSize = '0.9rem';
+                        successToast.style.letterSpacing = '0.3px';
+                        document.body.appendChild(successToast);
+                        setTimeout(() => {
+                            successToast.style.opacity = '0';
+                            setTimeout(() => successToast.remove(), 400);
+                        }, 2800);
+                        // also reset form fields? not necessary, just premium demo feel
+                        emailInput.style.borderColor = '#8affc2';
+                        passwordInput.style.borderColor = '#8affc2';
+                        setTimeout(() => {
+                            emailInput.style.borderColor = '';
+                            passwordInput.style.borderColor = '';
+                        }, 1000);
+                    }, 1400);
+                });
+            }
+
+            // subtle micro-movement on floating orbs based on mouse (premium depth)
+            document.addEventListener('mousemove', function(e) {
+                const balls = document.querySelectorAll('.ball');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                balls.forEach((ball, idx) => {
+                    const intensity = (idx + 1) * 8;
+                    const moveX = (mouseX - 0.5) * intensity;
+                    const moveY = (mouseY - 0.5) * intensity;
+                    ball.style.transform = `translate(${moveX * 0.6}px, ${moveY * 0.6}px)`;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

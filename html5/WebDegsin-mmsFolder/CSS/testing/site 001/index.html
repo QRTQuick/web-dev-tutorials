@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>РУСИНАН · AI Link Safety</title>
+    <!-- Google Fonts + Modern Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 30%, rgba(10, 20, 35, 1) 0%, rgba(2, 8, 18, 1) 100%);
+            min-height: 100vh;
+            color: #eef5ff;
+            backdrop-filter: blur(2px);
+        }
+
+        .bg-orb {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(0, 255, 196, 0.08) 0%, rgba(0, 150, 255, 0) 70%);
+            border-radius: 50%;
+            top: -20vh;
+            right: -20vw;
+            z-index: 0;
+            filter: blur(90px);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0, 255, 200, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 0%, #4effd0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            background: rgba(20, 30, 45, 0.65);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 60px;
+            border: 1px solid rgba(0, 255, 200, 0.3);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #b0d4ff;
+        }
+
+        .lang-btn.active {
+            background: #00e0c0;
+            color: #0a0f1a;
+            box-shadow: 0 0 12px rgba(0, 255, 200, 0.6);
+        }
+
+        .card {
+            background: rgba(12, 22, 35, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 0.8rem 0;
+        }
+
+        .url-input {
+            flex: 4;
+            background: rgba(0, 10, 20, 0.7);
+            border: 1.5px solid rgba(0, 255, 200, 0.4);
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
+            font-size: 1rem;
+            font-family: 'Inter', monospace;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #4effd0;
+            box-shadow: 0 0 18px rgba(78, 255, 208, 0.3);
+        }
+
+        .scan-btn {
+            flex: 1;
+            background: linear-gradient(95deg, #00c9a7, #00a3ff);
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 200, 180, 0.3);
+        }
+
+        .scan-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #00e0bc, #00b5ff);
+            box-shadow: 0 8px 20px rgba(0, 230, 190, 0.4);
+        }
+
+        .result-area {
+            margin-top: 2rem;
+            padding: 1.2rem;
+            border-radius: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.25s;
+        }
+
+        .verdict-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.6rem 1.5rem;
+            border-radius: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .safe {
+            background: rgba(0, 200, 100, 0.2);
+            border-left: 4px solid #2effb0;
+            color: #b6ffd8;
+        }
+
+        .unsafe {
+            background: rgba(255, 50, 50, 0.2);
+            border-left: 4px solid #ff5e6e;
+            color: #ffc2c2;
+        }
+
+        .unknown {
+            background: rgba(255, 180, 40, 0.2);
+            border-left: 4px solid #ffb347;
+        }
+
+        .ai-analysis {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 20, 30, 0.6);
+            border-radius: 1rem;
+            border-left: 3px solid #4effd0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .history-title {
+            font-size: 1.4rem;
+            margin: 1rem 0 1rem 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .history-table th, .history-table td {
+            padding: 1rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(78, 255, 208, 0.1);
+        }
+
+        .history-table th {
+            font-weight: 600;
+            color: #a0f0e0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-safe {
+            background: #1f9a5e30;
+            color: #9effcf;
+        }
+
+        .status-unsafe {
+            background: #ff4d4d30;
+            color: #ffb0b0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #4effd0;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 680px) {
+            .container { padding: 1rem; }
+            .input-group { flex-direction: column; }
+            .scan-btn { padding: 0.8rem; }
+            .history-table th, .history-table td { font-size: 0.75rem; padding: 0.6rem; }
+        }
+
+        i {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="bg-orb"></div>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <h1>РУСИНАН</h1>
+            <p data-i18n="tagline">🤖 AI-powered link safety · realtime verdict</p>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+            <button class="lang-btn active" data-lang="ru">🇷🇺 RU</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 data-i18n="main_title"><i class="fas fa-shield-alt"></i> Check website safety</h2>
+        <div class="input-group">
+            <input type="text" id="urlInput" class="url-input" placeholder="https://example.com or any suspicious link" data-i18n-placeholder="url_placeholder">
+            <button id="scanBtn" class="scan-btn"><i class="fas fa-crosshairs"></i> <span data-i18n="scan_btn">SCAN</span></button>
+        </div>
+        <div id="resultContainer" class="result-area">
+            <div style="text-align: center; opacity: 0.7;" data-i18n="initial_msg"><i class="fas fa-globe"></i> Enter a link and get security analysis</div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 1.5rem;">
+        <div class="history-title"><i class="fas fa-history"></i> <span data-i18n="history_title">Recent scans</span></div>
+        <div id="historyTableWrapper">
+            <table class="history-table" id="historyTable">
+                <thead>
+                    <tr><th data-i18n="th_url">URL</th><th data-i18n="th_verdict">Verdict</th><th data-i18n="th_time">Time</th></tr>
+                </thead>
+                <tbody id="historyBody">
+                    <tr><td colspan="3" style="text-align:center" data-i18n="no_history">— No scans yet —</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <span data-i18n="footer">РУСИНАН · AI + Google Safe Browsing · powered by Neon DB</span>
+    </div>
+</div>
+
+<script>
+    // i18n translations (EN + RU)
+    const translations = {
+        en: {
+            tagline: "🤖 AI-powered link safety · realtime verdict",
+            main_title: "<i class='fas fa-shield-alt'></i> Check website safety",
+            url_placeholder: "https://example.com or any suspicious link",
+            scan_btn: "SCAN",
+            initial_msg: "<i class='fas fa-globe'></i> Enter a link and get security analysis",
+            history_title: "Recent scans",
+            th_url: "URL",
+            th_verdict: "Verdict",
+            th_time: "Time",
+            no_history: "— No scans yet —",
+            footer: "РУСИНАН · AI + Google Safe Browsing · powered by Neon DB",
+            safe_label: "✅ SAFE",
+            unsafe_label: "⚠️ UNSAFE",
+            unknown_label: "❓ UNKNOWN",
+            loading: "Scanning with AI & threat intelligence...",
+            error_api: "Scan error, try again",
+            cached_info: " (cached result)"
+        },
+        ru: {
+            tagline: "🤖 Безопасность ссылок с ИИ · моментальная проверка",
+            main_title: "<i class='fas fa-shield-alt'></i> Проверка безопасности сайта",
+            url_placeholder: "https://example.com или подозрительная ссылка",
+            scan_btn: "ПРОВЕРИТЬ",
+            initial_msg: "<i class='fas fa-globe'></i> Вставьте ссылку и получите анализ безопасности",
+            history_title: "Недавние проверки",
+            th_url: "Ссылка",
+            th_verdict: "Статус",
+            th_time: "Время",
+            no_history: "— Нет проверок —",
+            footer: "РУСИНАН · ИИ + Google Safe Browsing · работа на Neon DB",
+            safe_label: "✅ БЕЗОПАСНО",
+            unsafe_label: "⚠️ ОПАСНО",
+            unknown_label: "❓ НЕИЗВЕСТНО",
+            loading: "Сканирование с помощью ИИ и систем безопасности...",
+            error_api: "Ошибка сканирования, попробуйте позже",
+            cached_info: " (кэшированный результат)"
+        }
+    };
+
+    let currentLang = 'ru';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                if (el.tagName === 'INPUT' && el.hasAttribute('data-i18n-placeholder')) {
+                    el.placeholder = translations[lang][key];
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
+            }
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        if (window.lastScanResult) displayResult(window.lastScanResult);
+        fetchHistory();
+    }
+
+    async function scanUrl(url) {
+        const resultDiv = document.getElementById('resultContainer');
+        resultDiv.innerHTML = `<div style="display:flex; align-items:center; gap:12px;"><span class="loader"></span> <span>${translations[currentLang].loading}</span></div>`;
+        try {
+            const response = await fetch(`/api/scan`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            window.lastScanResult = data;
+            displayResult(data);
+            fetchHistory();
+        } catch (err) {
+            console.error(err);
+            resultDiv.innerHTML = `<div style="color:#ff9e8f;"><i class="fas fa-exclamation-triangle"></i> ${translations[currentLang].error_api}</div>`;
+        }
+    }
+
+    function displayResult(data) {
+        const resultDiv = document.getElementById('resultContainer');
+        const verdict = data.safe ? 'safe' : (data.safe === false ? 'unsafe' : 'unknown');
+        let badgeClass = '';
+        let icon = '';
+        let verdictText = '';
+        if (verdict === 'safe') {
+            badgeClass = 'safe';
+            icon = '<i class="fas fa-check-circle"></i>';
+            verdictText = translations[currentLang].safe_label;
+        } else if (verdict === 'unsafe') {
+            badgeClass = 'unsafe';
+            icon = '<i class="fas fa-skull-crosswalk"></i>';
+            verdictText = translations[currentLang].unsafe_label;
+        } else {
+            badgeClass = 'unknown';
+            icon = '<i class="fas fa-question-circle"></i>';
+            verdictText = translations[currentLang].unknown_label;
+        }
+        const cacheNote = data.cached ? `<span style="font-size:0.7rem; opacity:0.7;">${translations[currentLang].cached_info}</span>` : '';
+        const threatMsg = data.threatType ? `<div style="margin-top: 8px; font-size:0.85rem; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:20px;"><i class="fas fa-chart-line"></i> ${data.threatType}</div>` : '';
+        const aiHtml = data.aiAnalysis ? `<div class="ai-analysis"><i class="fas fa-brain"></i> <strong>AI Analysis:</strong><br>${escapeHtml(data.aiAnalysis)}</div>` : '';
+        resultDiv.innerHTML = `
+            <div class="verdict-badge ${badgeClass}">
+                ${icon} ${verdictText} ${cacheNote}
+            </div>
+            <div style="word-break:break-all; font-size:0.85rem;"><i class="fas fa-link"></i> ${escapeHtml(data.url)}</div>
+            ${threatMsg}
+            ${aiHtml}
+        `;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m){
+            if(m==='&') return '&amp;';
+            if(m==='<') return '&lt;';
+            if(m==='>') return '&gt;';
+            return m;
+        });
+    }
+
+    async function fetchHistory() {
+        try {
+            const resp = await fetch('/api/history?limit=8');
+            if (!resp.ok) throw new Error();
+            const scans = await resp.json();
+            const tbody = document.getElementById('historyBody');
+            if (!scans.length) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center">${translations[currentLang].no_history}</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = scans.map(scan => {
+                let verdictClass = '';
+                let verdictLabel = '';
+                if (scan.verdict === 'safe') { verdictClass = 'status-safe'; verdictLabel = translations[currentLang].safe_label; }
+                else if (scan.verdict === 'unsafe') { verdictClass = 'status-unsafe'; verdictLabel = translations[currentLang].unsafe_label; }
+                else { verdictClass = 'status-unknown'; verdictLabel = translations[currentLang].unknown_label; }
+                const shortUrl = scan.url.length > 55 ? scan.url.substring(0, 52) + '...' : scan.url;
+                const date = new Date(scan.created_at).toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
+                return `<tr>
+                            <td title="${escapeHtml(scan.url)}">${escapeHtml(shortUrl)}</td>
+                            <td><span class="status-badge ${verdictClass}">${verdictLabel}</span></td>
+                            <td style="font-size:0.7rem;">${date}</td>
+                        </tr>`;
+            }).join('');
+        } catch(e) { console.warn("history error", e); }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+        setLanguage('ru');
+
+        const scanButton = document.getElementById('scanBtn');
+        const urlInput = document.getElementById('urlInput');
+        scanButton.addEventListener('click', () => {
+            let rawUrl = urlInput.value.trim();
+            if (!rawUrl) {
+                alert(currentLang === 'ru' ? 'Введите действительную ссылку' : 'Enter a valid URL');
+                return;
+            }
+            if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) rawUrl = 'https://' + rawUrl;
+            scanUrl(rawUrl);
+        });
+        urlInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') scanButton.click(); });
+        fetchHistory();
+    });
+</script>
+</body>
+</html>
